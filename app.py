@@ -14,10 +14,11 @@ from pywebio.output import *
 from pywebio.platform import tornado
 from pywebio import start_server
 import datetime as dt
+import random
 pd.options.mode.chained_assignment = None
 
 #Input to import the excel file
-file_path = file_upload("Please upload the file you want to clean. Also, make sure that the Index and Comment are in the name of the columns")
+file_path = file_upload("Please upload the file to predict NPS")
 
 #Input to get the folder path where user want to save file
 path_to_save = input("Please enter the path where you want to save the file")
@@ -40,7 +41,7 @@ def get_file():
     for i in range(0,len(df["Comment"])):     
         res = re.sub(r'[^\w\s]', '', df["Comment"][i])
         res_emoji = remove_emoji(res)
-        df["Cleaned_Comment"][i] = res_emoji
+        df["Cleaned_Comment"][i] = random.randint(1,5)
     #Drop the index created by Python    
     df = df.drop(columns='index', axis=1)
     return df
